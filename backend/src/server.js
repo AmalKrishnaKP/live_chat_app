@@ -12,6 +12,8 @@ dotenv.config()
 
 const PORT=process.env.PORT
 
+app.use(express.json())
+
 app.use("/app/auth",authRouters)
 
 app.listen(PORT,()=>{
