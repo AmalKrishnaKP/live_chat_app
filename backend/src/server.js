@@ -1,6 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
-
+import cookieParser from 'cookie-parser'
 
 
 import authRouters from './routers/auth.router.js'
@@ -8,11 +8,12 @@ import { connectDB } from './lib/db.js'
 
 
 const app=express()
-dotenv.config()
+dotenv.config() // to get the leys from the .env file like PORT,MONGOBD_URI etc..
 
 const PORT=process.env.PORT
 
-app.use(express.json())
+app.use(express.json()) // to extract "json data" from the body
+app.use(cookieParser())// to  reade the cookie from the client
 
 app.use("/app/auth",authRouters)
 
