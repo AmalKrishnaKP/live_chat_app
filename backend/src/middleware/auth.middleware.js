@@ -26,7 +26,7 @@ export const protector=async(req,res,next)=>{
         next()
     } catch (error) {
         console.log("error:"+error.message);
-        res.status(500).json({message:"server side error"})
+        res.status(500).json({message:"server side error-middleware"})
         
     }
         

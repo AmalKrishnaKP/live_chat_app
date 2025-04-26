@@ -4,6 +4,7 @@ import { generateTocken } from "../lib/utils.js"
 
 import bcrypt from 'bcryptjs'
 import { urlencoded } from "express"
+import cloudinary from "../lib/coudinary.js"
 
 
 export const login=async (req,res)=>{
@@ -99,14 +100,37 @@ export const logout=async(req,res)=>{
 }
 export const update=async(req,res)=>{
     try {
-        const user=req.user
-        // console.log(id);
+        const {propic}=req.body
+        const userID=req.user._id
         
-        res.status(200).json({user:user})
+        if(!propic){
+            res.status(400).json({message:"no profile pic available"})
+        }
+        
+        const picUrl=await cloudinary.uploader.upload(propic)
+        const updatedUser= await User.findByIdAndUpdate(
+            userID,
+            {profilePic:picUrl},
+            {new:true}
+        )
+
+        res.status(200).json({updatedUser})
         
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({message:"server error occured"})
+        res.status(500).json({message:"server error occured-update"})
         
     }
+}
+
+export const checkAuth=async(req,res)=>{
+    try {
+        res.status(200).json(req.user)
+
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({message:"server error occured-chechAuth"})
+        
+    }
+
 }
