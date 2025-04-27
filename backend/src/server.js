@@ -16,8 +16,8 @@ const PORT=process.env.PORT
 app.use(express.json()) // to extract "json data" from the body
 app.use(cookieParser())// to  reade the cookie from the client
 
-app.use("/app/auth",authRouters)
-app.use("/app/mesg",messgRouters)
+app.use("/api/auth",authRouters)
+app.use("/api/mesg",messgRouters)
 
 app.listen(PORT,()=>{
     console.log("server listening in port:"+PORT);
