@@ -8,7 +8,7 @@ import SettingsPage from './pages/SettingsPage'
 import SignUpPage from './pages/SignUpPage'
 import ProfilePage from './pages/ProfilePage'
 import { authStore } from './store/AuthStore'
-import {Loader} from "lucide-react"
+import {Loader} from "lucide-react"  // lucide for icons
 
 
 export default function App() {
