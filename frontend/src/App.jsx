@@ -9,6 +9,7 @@ import SignUpPage from './pages/SignUpPage'
 import ProfilePage from './pages/ProfilePage'
 import { authStore } from './store/AuthStore'
 import {Loader} from "lucide-react"  // lucide for icons
+import Toaster from 'react-hot-toast'
 
 
 export default function App() {
@@ -40,6 +41,10 @@ export default function App() {
         <Route path='/signup' element={!authUser?<SignUpPage/>:<Navigate to="/"/>}/>
         <Route path='/profile'  element={authUser?<ProfilePage/>: <Navigate to="/login"/>}/>
       </Routes>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
     </div>
   )
 }
