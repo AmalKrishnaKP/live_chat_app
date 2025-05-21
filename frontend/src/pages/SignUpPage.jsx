@@ -1,11 +1,11 @@
 import React from 'react'
 import { authStore } from '../store/AuthStore'
+import toast from 'react-hot-toast'
 import { Eye, EyeOff, Lock, Mail, MessageSquare, User } from 'lucide-react' 
 import {Link} from 'react-router-dom'
 
 
 import AuthImagePattern from '../components/AuthImagePattern.jsx'
-import toast from 'react-hot-toast'
 
 
 export default function SignUpPage() {
@@ -18,13 +18,21 @@ export default function SignUpPage() {
   const {isSigningUp,signup}=authStore()
 
   const validateForm =()=>{
+    if (!formData.fullname.trim()) return toast.error("full name is required");
+    if (!formData.email.trim()) return toast.error("email is required");
+    if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("invalied email");
+    if (!formData.password) return toast.error("password is require");
+    if (formData.password.length<6) return toast.error("password must be atleast 6 characters")
     
-    return toast.error("kelo dsaf")
+    return true;
   }
   const handleSubmit=(e)=>{
 
     e.preventDefault()
-    const x=validateForm()
+    const valied=validateForm()
+    if (valied==true) signup(formData);
+
+    console.log("hai")
   }
   
   return (
@@ -117,7 +125,7 @@ export default function SignUpPage() {
             </div>
 
 
-            <button type="submit" className="btn btn-primary w-full" disabled={isSigningUp}>
+            <button type='submit' className="btn btn-primary w-full" disabled={isSigningUp}>
               {isSigningUp ? (
                 <>
                   <Loader2 className="size-5 animate-spin" />
