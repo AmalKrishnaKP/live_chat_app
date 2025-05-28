@@ -9,7 +9,7 @@ import SignUpPage from './pages/SignUpPage'
 import ProfilePage from './pages/ProfilePage'
 import { authStore } from './store/AuthStore'
 import {Loader} from "lucide-react"  // lucide for icons
-import Toaster from 'react-hot-toast'
+import { Toaster } from 'react-hot-toast'
 
 
 export default function App() {

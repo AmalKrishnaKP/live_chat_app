@@ -1,7 +1,7 @@
 import React from 'react'
 import { authStore } from '../store/AuthStore'
 import toast from 'react-hot-toast'
-import { Eye, EyeOff, Lock, Mail, MessageSquare, User } from 'lucide-react' 
+import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare, User } from 'lucide-react' 
 import {Link} from 'react-router-dom'
 
 
@@ -11,14 +11,14 @@ import AuthImagePattern from '../components/AuthImagePattern.jsx'
 export default function SignUpPage() {
   const [showPassword,setShowPassword]=React.useState(false)
   const [formData,setFormData]=React.useState({
-    fullname:"",
+    fullName:"",
     email:"",
     password:""
   })
   const {isSigningUp,signup}=authStore()
 
   const validateForm =()=>{
-    if (!formData.fullname.trim()) return toast.error("full name is required");
+    if (!formData.fullName.trim()) return toast.error("full name is required");
     if (!formData.email.trim()) return toast.error("email is required");
     if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("invalied email");
     if (!formData.password) return toast.error("password is require");
@@ -32,8 +32,10 @@ export default function SignUpPage() {
     const valied=validateForm()
     if (valied==true) signup(formData);
 
-    console.log("hai")
+    
   }
+
+
   
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
@@ -69,8 +71,8 @@ export default function SignUpPage() {
                   className='input input-border  w-full pl-10'
                   type="text" 
                   placeholder='join'
-                  value={formData.fullname}
-                  onChange={(e)=>setFormData({...formData,fullname:e.target.value})} />
+                  value={formData.fullName}
+                  onChange={(e)=>setFormData({...formData,fullName:e.target.value})} />
               </div>                                                     
             </div>
 
