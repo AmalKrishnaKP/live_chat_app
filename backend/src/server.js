@@ -17,6 +17,7 @@ app.use(cors({
     credentials: true,
   }));
 
+app.use(express.json({ limit: '50mb' }));
 app.use(express.json()) // to extract "json data" from the body
 app.use(cookieParser())// to  reade the cookie from the client
 

@@ -100,14 +100,16 @@ export const logout=async(req,res)=>{
 }
 export const update=async(req,res)=>{
     try {
-        const {propic}=req.body
+        // console.log(req.body.profilePic);
+    
+        const {profilePic}=req.body
         const userID=req.user._id
         
-        if(!propic){
-            res.status(400).json({message:"no profile pic available"})
+        if(!profilePic){
+            return res.status(400).json({message:"no profile pic available"})
         }
         
-        const picUrl=await cloudinary.uploader.upload(propic)
+        const picUrl=(await cloudinary.uploader.upload(profilePic)).secure_url
         const updatedUser= await User.findByIdAndUpdate(
             userID,
             {profilePic:picUrl},
