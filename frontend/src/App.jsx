@@ -11,7 +11,7 @@ import { authStore } from './store/AuthStore'
 import {Loader} from "lucide-react"  // lucide for icons
 import { Toaster } from 'react-hot-toast'
 
-
+import { useThemeStore } from './store/useThemStore'
 export default function App() {
 
   const{authUser,checkAuth,ischeckingAuth}=authStore()
@@ -28,10 +28,12 @@ export default function App() {
       <Loader className='animate-spin' />
     </div>
   )
+
+  // const{theme}=useThemeStore()
   
 
   return (
-    <div >
+    <div  data-theme="dark">
       <Navbar/> 
       
       <Routes>
