@@ -7,7 +7,7 @@ import LoginPage from './pages/LoginPage'
 import SettingsPage from './pages/SettingsPage'
 import SignUpPage from './pages/SignUpPage'
 import ProfilePage from './pages/ProfilePage'
-import { authStore } from './store/AuthStore'
+import { authStore } from './store/authStore'
 import {Loader} from "lucide-react"  // lucide for icons
 import { Toaster } from 'react-hot-toast'
 
@@ -15,12 +15,13 @@ import { useThemeStore } from './store/useThemStore'
 export default function App() {
 
   const{authUser,checkAuth,ischeckingAuth}=authStore()
+  const {theme,setTheme}=useThemeStore()
 
   useEffect(()=>{
     checkAuth()
   },[checkAuth])
 
-  console.log(authUser);
+  // console.log(authUser);
   
   
   if (ischeckingAuth && !authUser)return(
@@ -34,7 +35,7 @@ export default function App() {
   
 
   return (
-    <div  data-theme="dark">
+    <div  data-theme={theme}>
       <Navbar/> 
       
       <Routes>

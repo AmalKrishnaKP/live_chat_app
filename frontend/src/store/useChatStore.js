@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 export  const useChatStore=create((set)=>({
     messages:[],
     users:[],
-    selectUser:null,
+    selectedUser:null,
     isUserLoading:false,
     isMessageLoading:false,
 
@@ -15,9 +15,10 @@ export  const useChatStore=create((set)=>({
         try {
             const res=await axiosInstance("/api/mesg/users")
             set({users:res.data})
+            // console.log(users);
             
         } catch (error) {
-            toast.error(error.responce.data.messages)
+            toast.error(error.response.data.messages)
         }finally{
             set({isMessageLoading:false})
         }
@@ -25,7 +26,7 @@ export  const useChatStore=create((set)=>({
     getMessages:async(userID)=>{
         set({isMessageLoading:true})
         try {
-            const res=await axiosInstance(`/api/mesgpersonal/${userID}`)
+            const res=await axiosInstance(`/api/mesg/personal/${userID}`)
             set({messages:res.data})
         } catch (error) {
             toast.error(error.responce.data.messages)
@@ -34,5 +35,13 @@ export  const useChatStore=create((set)=>({
             set({isMessageLoading:false})
         }
     },
-    setSelectedUser:(selectUser)=>{set({selectUser})}
+    setSelectedUser:(selectedUser)=>{
+        
+        set({selectedUser})
+        // console.log(selectedUser);
+        
+    },
+    unselectUser:()=>{
+        set({selectedUser:null})
+    }
 }))

@@ -10,7 +10,7 @@ export const authStore=create((set)=>({
     isLoggingUp:false,
     ischeckingAuth: true,
     isUpdatingProfile:false,
-
+    onlineUsers:[],
     checkAuth: async()=>{
         try {
             const res=await axiosInstance.get("/api/auth/check-auth")
@@ -61,7 +61,7 @@ export const authStore=create((set)=>({
         }
     },
     updateProfile:async(data)=>{
-        isUpdatingProfile:true
+        set({isUpdatingProfile:true})
         try {
             const res=await axiosInstance.put("/api/auth/update-profile",data)
             // console.log(res.data);
@@ -74,7 +74,7 @@ export const authStore=create((set)=>({
             console.log(error.response.data.message);
             
         }finally{
-            isUpdatingProfile:false
+            set({isUpdatingProfile:false})
         }
 
     }
