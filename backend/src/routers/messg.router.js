@@ -5,6 +5,6 @@ import { getmessages, getUsersForSidebar } from "../controllers/messg.controller
 const router= express.Router()
 
 router.get("/users",protector,getUsersForSidebar)
-router.get("personal/:id", protector,getmessages)
+router.get("/personal/:id", protector,getmessages)
 
 export default router
