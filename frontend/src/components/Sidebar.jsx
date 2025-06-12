@@ -48,7 +48,7 @@ const Sidebar = () => {
                   </div>
                   <div className="hidden lg:block text-left min-w-0">
                     <div className="font-medium truncate">{user.fullName}</div>
-                    <div className="text-sm text-shadow-zinc-400">
+                    <div className="text-sm text-shadow-zinc-400 text-secondary-content">
                       {onlineUsers.includes(user)?"Online":"Offline"}
                     </div>
                   </div>

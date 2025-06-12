@@ -35,6 +35,16 @@ export  const useChatStore=create((set)=>({
             set({isMessageLoading:false})
         }
     },
+    sendMessage:async(mesgData)=>{
+        const {selectedUser,messages}=get()
+        try {
+            const res=await axiosInstance.post(`/api/mesg/send/${selectedUser}`,mesgData)
+            set({messages:[... messages,res.data]})
+        } catch (error) {
+            toast.error(error.response.data.message)
+            
+        }
+    },
     setSelectedUser:(selectedUser)=>{
         
         set({selectedUser})

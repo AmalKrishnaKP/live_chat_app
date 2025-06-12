@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useChatStore } from '../store/useChatStore'
 import ChatHeader from './ChatHeader'
 import ChatInput from './ChatInput'
+import MessageSkeleton from '../skeleton/MessageSkeleton'
 const ChatContainer = () => {
   const {messages,isMessageLoading,getMessages,selectedUser}=useChatStore()
   useEffect(()=>{
@@ -11,13 +12,21 @@ const ChatContainer = () => {
   
   
 
-  if (isMessageLoading) return <div>loading..</div>
-  console.log(selectedUser._id);
-  
+  if (isMessageLoading)
+  {
+    return(
+      <div className="flex-1 flex flex-col overflow-auto">
+        <ChatHeader />
+        <MessageSkeleton />
+        <ChatInput />
+      </div>
+    ) 
+
+  }
   return (
-    <div className="flex-1 flex flex-col overflow-auto">
+    <div className="flex-1 flex flex-col overflow-auto justify-between">
       <ChatHeader />
-      <p>message..</p>
+      <div className='h-full shadow-2xl'>message..</div>
       <ChatInput />
     </div>
   )
