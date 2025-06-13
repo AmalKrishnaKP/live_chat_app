@@ -13,9 +13,9 @@ const ChatHeader = () => {
                 <img 
                 src={selectedUser.profilePic?selectedUser.profilePic:"/avatar.png"} 
                 alt="img"
-                className='size-12 mr-2' />
+                className='size-12 mr-2 rounded-full object-cover ' />
             </div>
-            <div className="hidden lg:block text-left min-w-0">
+            <div className="block text-left min-w-0">
                 <div className="font-medium truncate ">{selectedUser.fullName}</div>
                 <div className="text-sm text-shadow-zinc-400 text-secondary-content">
                     {onlineUsers.includes(selectedUser)?"Online":"Offline"}

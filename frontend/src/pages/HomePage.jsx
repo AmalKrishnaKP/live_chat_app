@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar'
 import ChatContainer from '../components/ChatContainer'
 export default function HomePage() {
   const {selectedUser}=useChatStore()
-  console.log(selectedUser);
+  // console.log(selectedUser);
   
   return (
     <div className='h-screen bg-base-200'  >

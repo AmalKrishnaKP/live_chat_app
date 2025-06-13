@@ -1,11 +1,17 @@
 import { Image, Send, X } from 'lucide-react'
 import React, { useRef, useState } from 'react'
+import { useChatStore } from '../store/useChatStore'
 
 const ChatInput = () => {
   const fileInputRef=useRef(null)
   const [text,setText]=useState("")
   const [imagePreview,setImagePreview]=useState(null)
+  const {sendMessage}=useChatStore()
+
+
+
   const handleImageChange=(e)=>{
+    e.preventDefault()
     const f=new FileReader()
     if(e.target.files[0]){
       f.readAsDataURL(e.target.files[0])
@@ -13,11 +19,32 @@ const ChatInput = () => {
         setImagePreview(f.result)
       }
     }
-    
   }
+  
+  
   const handleMessageSend=async(e)=>{
     e.preventDefault()
+    // console.log(text);
+    if (!text && !imagePreview) return;
+    try {
+      await sendMessage({
+        text:text,
+        image:imagePreview,
+      })
+      // console.log("input");
+      
+      setImagePreview(null)
+      setText("")
+      if(fileInputRef.current)fileInputRef.current.value=""
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+
+    
   }
+  
   const removeImage=()=>{
       setImagePreview(null)
   }
@@ -50,7 +77,7 @@ const ChatInput = () => {
           <input
             type="text" 
             name='mesg'
-            disabled={imagePreview}
+            // disabled={imagePreview}
             value={text} 
             className="border border-y-primary border-x-primary rounded-sm w-full p-2 mr-2 text-secondary-content" 
             onChange={(e)=>setText(e.target.value)}
@@ -66,9 +93,9 @@ const ChatInput = () => {
           />
           <button
             className={`  btn btn-circle
-                        ${text?"hidden":""}
                         ${imagePreview?"text-emerald-500":""}
               `}
+            type='button'
             onClick={()=>fileInputRef.current.click()}
             >
             <Image 
