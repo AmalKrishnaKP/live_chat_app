@@ -4,6 +4,7 @@ import ChatHeader from './ChatHeader'
 import ChatInput from './ChatInput'
 import MessageSkeleton from '../skeleton/MessageSkeleton'
 import { authStore } from '../store/authStore'
+import { timeconvert } from '../lib/utils.js'
 const ChatContainer = () => {
   const {messages,isMessageLoading,getMessages,selectedUser}=useChatStore()
   const {authUser}=authStore()
@@ -49,7 +50,14 @@ const ChatContainer = () => {
             
               mesg.senderId==selectedUser._id?
               <div className="chat chat-start">
-                
+                <div className="chat-image avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="profilepic"
+                      src={selectedUser.profilePic?selectedUser.profilePic:"/avatar.png"}
+                    />
+                  </div>
+                </div>
                 <div className="chat-header">
                   {selectedUser.fullName}
                 </div>
@@ -58,20 +66,30 @@ const ChatContainer = () => {
                     <img 
                       src={mesg.image} 
                       alt="" 
-                      className='h-30 rounded-md '
+                      className='h-40 rounded-md '
                     />
                     :null
                   } 
                   {mesg.text}
                   <div className='flex justify-start'>
-                    <time className="text-xs opacity-50">{mesg.updatedAt}</time>
+                    <time className="text-[10px] opacity-50">{timeconvert(mesg.updatedAt)}</time>
 
                   </div>
                 </div>
               </div>
+              
               : 
               <div className="chat chat-end m-5">
-                
+                <div className="chat-image avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="profilepic"
+                      src={authUser.profilePic?authUser.profilePic:"/avatar.png"}
+                      
+                    />
+                  </div>
+                  
+                </div>
                 <div className="chat-header ">
                   {authUser.fullName}
                   
@@ -81,14 +99,14 @@ const ChatContainer = () => {
                   <img 
                     src={mesg.image} 
                     alt="" 
-                    className='h-30 rounded-md '
+                    className='h-40 rounded-md '
                   />
                   :null
                   } 
                   {mesg.text}
                   <div className='flex justify-end'>
-                    <time className="text-xs opacity-50">{mesg.updatedAt}</time>
-
+                    <time className="text-[10px] opacity-50">{timeconvert(mesg.updatedAt)}</time>
+                  
                   </div>
                 </div>
                 
@@ -96,107 +114,9 @@ const ChatContainer = () => {
           )
           )
         }
-      </div>
-      {/* <div className='overflow-x-auto'>
-      <div className="chat chat-start">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-header">
-          Obi-Wan Kenobi
-          <time className="text-xs opacity-50">12:45</time>
-        </div>
-        <div className="chat-bubble">You were the Chosen One!</div>
-        <div className="chat-footer opacity-50">Delivered</div>
+        <div></div>
       </div>
       
-      <div className="chat chat-start">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-header">
-          Obi-Wan Kenobi
-          <time className="text-xs opacity-50">12:45</time>
-        </div>
-        <div className="chat-bubble">You were the Chosen One!</div>
-        <div className="chat-footer opacity-50">Delivered</div>
-      </div>
-      
-      <div className="chat chat-start">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-header">
-          Obi-Wan Kenobi
-          <time className="text-xs opacity-50">12:45</time>
-        </div>
-        <div className="chat-bubble">You were the Chosen One!</div>
-        <div className="chat-footer opacity-50">Delivered</div>
-      </div>
-      <div className="chat chat-end">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/profile/demo/anakeen@192.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-header">
-          Anakin
-          <time className="text-xs opacity-50">12:46</time>
-        </div>
-        <div className="chat-bubble">I hate you!</div>
-        <div className="chat-footer opacity-50">Seen at 12:46</div>
-      </div>
-      <div className="chat chat-start">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-header">
-          Obi-Wan Kenobi
-          <time className="text-xs opacity-50">12:45</time>
-        </div>
-        <div className="chat-bubble">You were the Chosen One!</div>
-        <div className="chat-footer opacity-50">Delivered</div>
-      </div>
-      <div className="chat chat-end">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/profile/demo/anakeen@192.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-header">
-          Anakin
-          <time className="text-xs opacity-50">12:46</time>
-        </div>
-        <div className="chat-bubble">I hate you!</div>
-        <div className="chat-footer opacity-50">Seen at 12:46</div>
-      </div>
-      </div> */}
       <ChatInput />
     </div>
   )

@@ -3,8 +3,13 @@ import { useChatStore } from '../store/useChatStore'
 import NoChatSelected from '../components/NoChatSelected'
 import Sidebar from '../components/Sidebar'
 import ChatContainer from '../components/ChatContainer'
+import { authStore } from '../store/authStore'
 export default function HomePage() {
   const {selectedUser}=useChatStore()
+  const {onlineUsers}=authStore()
+  console.log(onlineUsers);
+  
+  
   // console.log(selectedUser);
   
   return (

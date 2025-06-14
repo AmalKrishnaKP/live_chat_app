@@ -34,22 +34,23 @@ const Sidebar = () => {
                     ${selectedUser?._id==user._id?"bg-base-300 ring-1 ring-base-300":""}
                   `}
                 >
-                  <div className="relative mx-auto md:mx-0">
+                  <div className="relative mx-auto md:mx-0 overflow-clip">
                     <img src={user.profilePic? user.profilePic:"/avatar.png "}
                       alt={user.fullName} 
                       className='object-cover rounded-full size-12'
                     />
-                    {onlineUsers.includes(user._id)&&(
+                    {onlineUsers.includes(user._id)?
                       <span 
-                        className='relative bottom-0 right-0 size-3 bg-green-500
+                        className='absolute bottom-0  right-0 size-2  bg-green-500
                         rounded-full ring-2 ring-zinc-900'
                       />
-                    )}
+                      :""
+                     }
                   </div>
                   <div className="hidden md:block text-left min-w-0">
                     <div className="font-medium truncate">{user.fullName}</div>
                     <div className="text-sm text-shadow-zinc-400 text-secondary-content">
-                      {onlineUsers.includes(user)?"Online":"Offline"}
+                      {onlineUsers.includes(user._id)?"Online":"Offline"}
                     </div>
                   </div>
                 </button>

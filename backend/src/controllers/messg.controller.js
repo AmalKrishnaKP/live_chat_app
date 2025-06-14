@@ -6,7 +6,7 @@ export const getUsersForSidebar=async(req,res)=>{
     try {
         const logedUser=req.user._id
         const filterUser=await User.find({_id:{$ne:logedUser}}).select("-password")
-        console.log(filterUser);
+        // console.log(filterUser);
         
 
         res.status(200).json(filterUser)
@@ -22,7 +22,7 @@ export const getmessages = async(req,res)=>{
     try {
         const {id}= req.params
         const myId=req.user._id
-        console.log(Mesg);
+        // console.log(Mesg);
         
         const messages=await Mesg.find({
             $or:[

@@ -18,7 +18,7 @@ const ChatHeader = () => {
             <div className="block text-left min-w-0">
                 <div className="font-medium truncate ">{selectedUser.fullName}</div>
                 <div className="text-sm text-shadow-zinc-400 text-secondary-content">
-                    {onlineUsers.includes(selectedUser)?"Online":"Offline"}
+                    {onlineUsers.includes(selectedUser._id)?"Online":"Offline"}
                 </div>
             </div>
         </div>

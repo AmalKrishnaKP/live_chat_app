@@ -6,9 +6,8 @@ import cors from 'cors'
 import authRouters from './routers/auth.router.js'
 import messgRouters from './routers/messg.router.js'
 import { connectDB } from './lib/db.js'
+import { app, server} from './lib/socket.js'
 
-
-const app=express()
 dotenv.config() // to get the leys from the .env file like PORT,MONGOBD_URI etc..
 
 const PORT=process.env.PORT
@@ -27,7 +26,7 @@ app.use("/api/mesg",messgRouters)
 app.get("/one", async(req,res)=>{
   res.status(200).json({message:"hello"})
 })
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     console.log("server listening in port:"+PORT);
     connectDB()
 
