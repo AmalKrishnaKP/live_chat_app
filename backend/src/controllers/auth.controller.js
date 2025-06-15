@@ -5,6 +5,7 @@ import { generateTocken } from "../lib/utils.js"
 import bcrypt from 'bcryptjs'
 import { urlencoded } from "express"
 import cloudinary from "../lib/coudinary.js"
+import { io } from "../lib/socket.js"
 
 
 export const login=async (req,res)=>{
@@ -60,22 +61,31 @@ export const signup= async (req,res)=>{
 
         const h_password=await bcrypt.hash(password,salt)
 
-        const newUser=new User({
+        const newUser= new User({
             fullName,
             email,
             password:h_password,
         })
 
         if(newUser){
-            generateTocken(User._id,res)
+            console.log("nw user");
+            
+            generateTocken(newUser._id,res)
+            
             await newUser.save()
-
             res.status(201).json({
                 _id:newUser._id,
                 fullName:newUser.fullName,
                 email:newUser.email,
                 profilePic:newUser.profilePic,
             })
+            // const newSignUp={                -------------------
+            //     id:newUser._id,
+            //     fullName:newUser.fullName,
+            //     email:newUser.email,
+            //     profilePic:newUser.profilePic,
+            // }
+            // io.emit("newSignUps",(newSignUp))---------------------
         }
         else{
             res.status(400).json({message:"invalid user info"})

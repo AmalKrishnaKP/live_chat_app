@@ -1,6 +1,7 @@
 import { User } from "../models/user.model.js"
 import { Mesg } from "../models/message.model.js"
 import cloudinary from "../lib/coudinary.js"
+import { getReciverSocketID, io } from "../lib/socket.js"
 
 export const getUsersForSidebar=async(req,res)=>{
     try {
@@ -44,14 +45,14 @@ export const sendMessage=async (req,res)=>{
         console.log(reciverId);
         
         const senderId=req.user._id
-
+        
         let imgUrl
-
+        
         if(image){
             const responce= await cloudinary.uploader.upload(image)
             imgUrl=responce.secure_url
         }
-
+        
         const newMesg= new Mesg(
             {
                 senderId,
@@ -61,8 +62,14 @@ export const sendMessage=async (req,res)=>{
             }
         )
         await newMesg.save()
-// real time functionality using socket.io
+        // real time functionality using socket.io
+        const recSocketID=getReciverSocketID(reciverId)
+        if (recSocketID){
+            io.to(recSocketID).emit("newMessage",(newMesg))
+        } 
+        
         res.status(201).json(newMesg)
+        
 
     } catch (error) {
         console.log(error.message);

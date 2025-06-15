@@ -7,10 +7,7 @@ import { authStore } from '../store/authStore'
 export default function HomePage() {
   const {selectedUser}=useChatStore()
   const {onlineUsers}=authStore()
-  console.log(onlineUsers);
   
-  
-  // console.log(selectedUser);
   
   return (
     <div className='h-screen bg-base-200'  >
