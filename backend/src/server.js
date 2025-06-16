@@ -9,7 +9,7 @@ import { connectDB } from './lib/db.js'
 import { app, server} from './lib/socket.js'
 import path, { join } from 'path'
 
-const __dinName=path.resolve()
+const __dirname=path.resolve()
 dotenv.config() // to get the leys from the .env file like PORT,MONGOBD_URI etc..
 
 const PORT=process.env.PORT
