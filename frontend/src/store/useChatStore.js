@@ -77,16 +77,17 @@ export  const useChatStore=create((set,get)=>({
         const socket=authStore.getState().socket
         socket.off("newMessage")
     },
-    // newUseradder:()=>{                            -------------------
-    //     const socket=authStore.getState().socket
+    newUseradder:()=>{                           
+        const socket=authStore.getState().socket
         
-    //     socket.on("newSignUps",(newUser)=>{
-    //         set({users:[... get().users,newUser]})
-    //     })
-    //     get().subscribMesg()
-    // },
-    // stopUseradd:()=>{                             ---------------------   
-    //     const socket=authStore.getState().socket
-    //     socket.off("newSignUps")
-    // }
+        socket.on("newSignUps",(newUser)=>{
+            set({users:[... get().users,newUser]})
+        })
+        
+    },
+    stopUseradd:()=>{                            
+
+        const socket=authStore.getState().socket
+        socket.off("newSignUps")
+    }
 }))

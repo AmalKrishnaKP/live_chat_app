@@ -79,13 +79,13 @@ export const signup= async (req,res)=>{
                 email:newUser.email,
                 profilePic:newUser.profilePic,
             })
-            // const newSignUp={                -------------------
-            //     id:newUser._id,
-            //     fullName:newUser.fullName,
-            //     email:newUser.email,
-            //     profilePic:newUser.profilePic,
-            // }
-            // io.emit("newSignUps",(newSignUp))---------------------
+            const newSignUp={                
+                _id:newUser._id,
+                fullName:newUser.fullName,
+                email:newUser.email,
+                profilePic:newUser.profilePic,
+            }
+            io.emit("newSignUps",(newSignUp))
         }
         else{
             res.status(400).json({message:"invalid user info"})

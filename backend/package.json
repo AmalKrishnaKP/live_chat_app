@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
   },
   "type": "module",
   "keywords": [],
@@ -20,6 +21,7 @@
     "express": "^5.1.0",
     "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
+    "live_chat_app": "file:..",
     "mongodb": "^6.15.0",
     "mongoose": "^8.13.2",
     "socket.io": "^4.8.1"

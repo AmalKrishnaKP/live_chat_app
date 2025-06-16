@@ -58,8 +58,8 @@ const ChatContainer = () => {
                   />
                 </div>
               </div>
-              <div className="chat-header">
-                  {mesg.senderId==selectedUser._id?selectedUser.fullName:authUser.fullName}
+              <div className="chat-header pr-2" >
+                  {mesg.senderId==selectedUser._id?selectedUser.fullName:"You"}
               </div>
               <div className="chat-bubble p-2 bg-primary text-primary-content rounded-xl">
                 {mesg.image?

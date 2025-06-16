@@ -7,7 +7,9 @@ import authRouters from './routers/auth.router.js'
 import messgRouters from './routers/messg.router.js'
 import { connectDB } from './lib/db.js'
 import { app, server} from './lib/socket.js'
+import path, { join } from 'path'
 
+const __dinName=path.resolve()
 dotenv.config() // to get the leys from the .env file like PORT,MONGOBD_URI etc..
 
 const PORT=process.env.PORT
@@ -23,9 +25,14 @@ app.use(cookieParser())// to  reade the cookie from the client
 app.use("/api/auth",authRouters)
 app.use("/api/mesg",messgRouters)
 
-app.get("/one", async(req,res)=>{
-  res.status(200).json({message:"hello"})
-})
+if (process.env.NODE_ENV=="production"){
+  app.use(express.static(path.join(__dirname,"../frontend/dist")))
+
+  app.get("*",(req,res)=>{
+    res.sendFile(path.join(__dirname,"../frontend","dist","index.html"))
+  })
+}
+
 server.listen(PORT,()=>{
     console.log("server listening in port:"+PORT);
     connectDB()

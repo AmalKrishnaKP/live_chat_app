@@ -11,8 +11,8 @@ const Sidebar = () => {
   
   useEffect(()=>{
     getUsers()
-    // newUseradder()            ----------------
-    // return ()=> stopUseradd() ----------------
+    newUseradder()            
+    return ()=> stopUseradd() 
   },[getUsers])
   if (isUserLoading)
     return <SidebarSkeleton />
