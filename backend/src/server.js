@@ -33,6 +33,8 @@ if (process.env.NODE_ENV=="production"){
   })
 }
 
+app.all('/{*any}', (req, res, next) => {})
+
 server.listen(PORT,()=>{
     console.log("server listening in port:"+PORT);
     connectDB()
