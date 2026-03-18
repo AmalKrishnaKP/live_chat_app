@@ -63,8 +63,8 @@ export default function SignUpPage() {
               <label htmlFor="" className="label">
                 <span className="font-medium">Full Name</span>
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none">
+              <div className="relative flex items-center ">
+                <div className="absolute inset-y-0 left-0 pl-1  pointer-events-none">
                   <User className='size-6 test-base-content/40 overflow-y-visible z-10' />
                 </div>
                 <input 

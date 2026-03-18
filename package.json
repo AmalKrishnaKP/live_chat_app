@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend ",
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend ",
     "start": "npm  run start --prefix backend"
   },
   "repository": {
@@ -18,5 +18,8 @@
     "url": "https://github.com/AmalKrishnaKP/live_chat_app/issues"
   },
   "homepage": "https://github.com/AmalKrishnaKP/live_chat_app#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "zustand": "^5.0.6"
+  }
 }

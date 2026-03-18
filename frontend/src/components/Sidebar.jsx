@@ -26,7 +26,7 @@ const Sidebar = () => {
             <span className="font-medium hidden md:block">Contacts</span>
 
           </div>
-          <div className="overflow-y-auto w-full p-3">
+          <div className="overflow-y w-full p-3">
             {
               users.map((user)=>(
                 <button
